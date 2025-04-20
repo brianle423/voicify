@@ -8,15 +8,15 @@ const NavBar = ({cameraStatus}) => {
   return (
     <div className="h-18 w-full bg-white mb-8 flex justify-between items-center
                     border-b border-gray-300">
-        <div className='flex'>
-            <img src="logo.png" alt="logo" className="h-full w-full ml-4" />
+        <div className='flex flex-row items-center'>
+            <img src="/logo.svg" alt="logo" className="h-12 w-12 ml-4" />
             <p className="text-center ml-4 font-bold text-3xl">
                 Voicify
             </p>
         </div>
         
         <div className={activityFeedStyle + " rounded-full h-12 w-40 mr-4 border flex justify-center items-center"}>
-            <p className={activityTextColor + "text-center text-xl font-bold"}>
+            <p className={activityTextColor + "text-center text-x font-bold"}>
                 {activityText}
             </p>
         </div>

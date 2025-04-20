@@ -8,7 +8,7 @@ function App() {
       <NavBar cameraStatus={true}/>
       <div className="flex flex-row w-5/6 mx-auto">
         {/* left column */}
-        <div className="flex-1 flex flex-col justify-center items-center border rounded-lg bg-gray-500">
+        <div className="flex-1 flex flex-col justify-center items-center border rounded-lg bg-gray-800">
           <WebcamFeed />
         </div>
         {/* right column */}
