@@ -1,17 +1,25 @@
 import React from 'react'
 
-const NavBar = ({camera}) => {
-  const activityFeedStyle = camera ? 'bg-green-500' : 'bg-red-500'
+const NavBar = ({cameraStatus}) => {
+  const activityFeedStyle = cameraStatus ? 'bg-green-300 border-green-400' : 'bg-red-300 border-red-400'
+  const activityText = cameraStatus ? 'Active' : 'Inactive'
+  const activityTextColor = cameraStatus ? 'text-green-400' : 'text-red-400'
+
   return (
-    <div className="h-18 w-full bg-white mb-8 flex justify-between items-center">
+    <div className="h-18 w-full bg-white mb-8 flex justify-between items-center
+                    border-b border-gray-300">
         <div className='flex'>
             <img src="logo.png" alt="logo" className="h-full w-full ml-4" />
-            <p className="text-center ml-4 font-bold text-xl">
+            <p className="text-center ml-4 font-bold text-3xl">
                 Voicify
             </p>
         </div>
         
-        <p className={activityFeedStyle + " text-center"}>Activity Feed</p>
+        <div className={activityFeedStyle + " rounded-full h-12 w-40 mr-4 border flex justify-center items-center"}>
+            <p className={activityTextColor + "text-center text-xl font-bold"}>
+                {activityText}
+            </p>
+        </div>
     </div>
   )
 }
