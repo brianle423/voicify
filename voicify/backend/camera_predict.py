@@ -134,7 +134,7 @@ while True:
             same_prediction_count = 0
         else:
             print("⚠️ Prediction not stable enough to accept")
-        with open("backend/saved_word.txt", "w") as f:
+        with open("voicify/backend/saved_word.txt", "w") as f:
             f.write(current_word)
 
 cap.release()
