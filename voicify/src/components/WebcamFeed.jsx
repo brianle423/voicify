@@ -41,7 +41,7 @@ const WebcamFeed = ({ onFrame }) => {
     <div style={{ position: 'relative', width: '100%' }}>
       <video
         ref={videoRef}
-        style={{ width: '100%', transform: 'scaleX(-1)', display: 'block' }}
+        style={{ height: '80%', width: '80%', transform: 'scaleX(-1)', display: 'block' }}
         autoPlay
         muted
         playsInline
