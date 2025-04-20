@@ -237,7 +237,7 @@ function App() {
         <NavBar cameraStatus={isCameraOn} />
         <div className="flex flex-row w-5/6 mx-auto space-x-10">
           {/* left column */}
-          <div className="flex-2.5 flex flex-col justify-center items-center border rounded-lg bg-gray-800">
+          <div className="flex-3 flex flex-col justify-center items-center border rounded-lg bg-gray-800">
             <WebcamFeed
               ref={webcamRef}
               onCameraOn={handleCameraStatusChange}
@@ -259,8 +259,9 @@ function App() {
               onSpeakHistory={speakHistory}
             />
           </div> */}
-          <div className="flex flex flex-col justify-between items-center space-y-6">
-            <CurrentSignDisplay />
+          <div className="flex-2 flex flex-col justify-between items-center space-y-6">
+            <CurrentSignDisplay onSaveSign={handleSaveSign} />
+
             <SignHistory
               history={signHistory}
               onClearHistory={handleClearHistory}

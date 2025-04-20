@@ -276,11 +276,11 @@ from collections import deque, Counter
 import requests
 
 # --- Setup ---
-current_word = ""
+current_detected_sign = ""
 prediction_window = deque(maxlen=15)
 
 # Load model
-model_dict = pickle.load(open('/Users/Brian/PycharmProjects/Voicify/voicify/voicify/backend/model_v2.p', 'rb'))
+model_dict = pickle.load(open('C:/Users/ryanh/OneDrive/Documents/GitHub/voicify/voicify/backend/model_v2.p', 'rb'))
 model = model_dict['model']
 
 # MediaPipe and OpenCV setup
@@ -370,6 +370,11 @@ def generate_video_stream():
                               -1)
                 cv2.putText(frame, f"Stability: {int(progress_ratio * 100)}%", (bar_x, bar_y - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                
+                # write current letter to current_sign.txt if progress bar is at 100%
+                global current_detected_sign
+                if stable_prediction and stability_ratio >= 0.8:
+                    current_detected_sign = stable_prediction
                 
 
         _, jpeg = cv2.imencode('.jpg', frame)
