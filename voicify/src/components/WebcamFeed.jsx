@@ -78,10 +78,13 @@ const WebcamFeed = forwardRef(({ onFrame, onCameraOn }, ref) => {
   return (
     <div className="w-full">
       <div className="flex flex-row justify-between items-center px-4">
-        <p className="text-2xl font-bold text-white">Camera</p>
+        <div className="flex flex-row items-center space-x-2">
+          <span className="material-icons text-white">videocam</span>
+          <p className="text-2xl font-bold text-white">Camera</p>
+        </div>
         <button
           onClick={handleCameraOn}
-          className={`mb-3 px-4 py-2 mt-3 text-white border-none relative absolute rounded-md cursor-pointer ${
+          className={`mb-3 px-4 py-2 mt-3 text-white border-none relative absolute rounded-md cursor-pointer font-bold ${
             cameraOn ? 'bg-red-600' : 'bg-gray-600'
           }`}
         >

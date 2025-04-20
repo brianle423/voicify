@@ -19,8 +19,9 @@ function App() {
           <WebcamFeed
             onCameraOn={(newVal) => setCameraOn(newVal)}
           />  
-          <div className="w-full text-center text-white mt-2 py-2">
-            Position yourself in the frame with good lighting for best results.
+          <div className="flex flex-row items-center space-x-2 w-full text-white my-1 py-2 px-4">
+            <span className="material-icons text-white">info</span>
+            <p>Position yourself in the frame with good lighting for best results.</p>
           </div>
         </div>
         {/* right column */}
