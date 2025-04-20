@@ -51,9 +51,21 @@ while True:
         )
 
         # Extract relative landmarks
+        # x_ = [lm.x for lm in hand_landmarks.landmark]
+        # y_ = [lm.y for lm in hand_landmarks.landmark]
+        # data_aux = [(lm.x - min(x_), lm.y - min(y_)) for lm in hand_landmarks.landmark]
         x_ = [lm.x for lm in hand_landmarks.landmark]
         y_ = [lm.y for lm in hand_landmarks.landmark]
-        data_aux = [(lm.x - min(x_), lm.y - min(y_)) for lm in hand_landmarks.landmark]
+
+        x_min, x_max = min(x_), max(x_)
+        y_min, y_max = min(y_), max(y_)
+
+        # Avoid division by zero if hand is perfectly still
+        x_range = x_max - x_min if (x_max - x_min) != 0 else 1e-6
+        y_range = y_max - y_min if (y_max - y_min) != 0 else 1e-6
+
+        # Normalize each landmark relative to the hand's bounding box
+        data_aux = [((lm.x - x_min) / x_range, (lm.y - y_min) / y_range) for lm in hand_landmarks.landmark]
 
         # Flatten the landmark list
         data_aux_flat = [val for pair in data_aux for val in pair]
