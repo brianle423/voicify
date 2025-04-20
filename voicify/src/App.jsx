@@ -18,13 +18,15 @@ function App() {
         <div className="flex-1 flex flex-col justify-center items-center border rounded-lg bg-gray-800">
           <WebcamFeed
             onCameraOn={(newVal) => setCameraOn(newVal)}
-          />
+          />  
+          <div className="w-full text-center text-white mt-2 py-2">
+            Position yourself in the frame with good lighting for best results.
+          </div>
         </div>
         {/* right column */}
         <div className="flex-1 flex flex-col justify-between  items-center">
           <CurrentSignDisplay />
           <SignHistory />
-
         </div>
       </div>
     </div>

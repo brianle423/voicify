@@ -90,7 +90,7 @@ const WebcamFeed = forwardRef(({ onFrame, onCameraOn }, ref) => {
       </div>
 
       <div
-        className="relative w-full h-120 bg-gray-700 rounded-b-lg overflow-hidden"
+        className="relative w-full h-120 bg-gray-700 overflow-hidden"
       >
         <video
           ref={videoRef}
