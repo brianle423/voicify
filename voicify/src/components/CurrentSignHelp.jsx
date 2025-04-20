@@ -13,7 +13,7 @@ const CurrentSignHelp = () => {
 
   return (
     <React.Fragment>
-      <div className="mb-3 px-4 py-2 mt-3 bg-gray-600 text-white border-none relative absolute rounded-md cursor-pointer" onClick={handleClick}>
+      <div className="mb-3 px-4 py-2 mt-3 bg-gray-600 hover:bg-gray-900 text-white border-none relative absolute rounded-md cursor-pointer font-bold" onClick={handleClick}>
         Help
       </div>
       {isHelpOpen && (
@@ -21,9 +21,9 @@ const CurrentSignHelp = () => {
           className="fixed inset-0 bg-black/70 flex items-center justify-center"
         >
           <div
-            className="w-200 bg-white border border-gray-400 rounded-md p-4 shadow-md"
+            className="w-200 bg-white border border-gray-400 rounded-lg p-4 shadow-md"
           >
-            <div className="mt-2">
+            <div className="mt-2 flex flex-col justify-center items-center space-y-2">
               <p>
                 This section displays a guide to the American Sign Language.
               </p>
@@ -31,7 +31,7 @@ const CurrentSignHelp = () => {
             </div>
             <div className="flex justify-center mt-4">
               <button
-                className="text-red-500 hover:text-red-600"
+                className="bg-red-600 text-white font-bold hover:bg-red-900 px-4 py-2 rounded-md border border-red-400"
                 onClick={handleClose}
               >
                 Close

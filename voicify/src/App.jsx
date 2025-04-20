@@ -25,7 +25,7 @@ function App() {
           </div>
         </div>
         {/* right column */}
-        <div className="flex-1 flex flex-col justify-between  items-center">
+        <div className="flex-1 flex flex-col justify-between items-center">
           <CurrentSignDisplay />
           <SignHistory />
         </div>
