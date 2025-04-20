@@ -116,8 +116,6 @@ while True:
             cv2.putText(frame, f"Hold: {same_prediction_count}/{threshold}",
                         (bar_x, bar_y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
-
-
     cv2.imshow('frame', frame)
     k = cv2.waitKey(1)
 
