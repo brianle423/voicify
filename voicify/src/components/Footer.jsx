@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className="w-full h-40 border-t border-gray-300 mt-8">
+    <div className="w-full h-40 border-t border-gray-600 mt-8">
         <div className="flex flex-col h-full justify-between items-center px-4 pt-8">
             <p>
                 Voicify is a real-time sign language translation platform that converts American Sign Language (ASL) 
