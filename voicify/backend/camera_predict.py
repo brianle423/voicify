@@ -2,19 +2,14 @@ import pickle
 import cv2
 import mediapipe as mp
 import numpy as np
+from collections import deque, Counter
 
 # State tracking
 current_word = ""
-prev_prediction = None
-same_prediction_count = 0
-threshold = 15  # 15 consistent frames before saving
+prediction_window = deque(maxlen=15)
 
 # Load model
-<<<<<<< HEAD
-model_dict = pickle.load(open('backend/model_v2.p', 'rb'))
-=======
-model_dict = pickle.load(open('voicify/backend/model_v2.p', 'rb'))
->>>>>>> f1926140dfbc4d3e6020b92252cec2dfb6d17a86
+model_dict = pickle.load(open('voicify/backend/model.p', 'rb'))
 model = model_dict['model']
 
 # Webcam and MediaPipe setup
@@ -54,22 +49,9 @@ while True:
             mp_drawing_styles.get_default_hand_connections_style()
         )
 
-        # Extract relative landmarks
-        # x_ = [lm.x for lm in hand_landmarks.landmark]
-        # y_ = [lm.y for lm in hand_landmarks.landmark]
-        # data_aux = [(lm.x - min(x_), lm.y - min(y_)) for lm in hand_landmarks.landmark]
         x_ = [lm.x for lm in hand_landmarks.landmark]
         y_ = [lm.y for lm in hand_landmarks.landmark]
-
-        x_min, x_max = min(x_), max(x_)
-        y_min, y_max = min(y_), max(y_)
-
-        # Avoid division by zero if hand is perfectly still
-        x_range = x_max - x_min if (x_max - x_min) != 0 else 1e-6
-        y_range = y_max - y_min if (y_max - y_min) != 0 else 1e-6
-
-        # Normalize each landmark relative to the hand's bounding box
-        data_aux = [((lm.x - x_min) / x_range, (lm.y - y_min) / y_range) for lm in hand_landmarks.landmark]
+        data_aux = [(lm.x - min(x_), lm.y - min(y_)) for lm in hand_landmarks.landmark]
 
         # Flatten the landmark list
         data_aux_flat = [val for pair in data_aux for val in pair]
@@ -78,12 +60,16 @@ while True:
             prediction = model.predict([np.asarray(data_aux_flat)])
             predicted_character = label_dict[int(prediction[0])]
 
-            if predicted_character == prev_prediction:
-                if same_prediction_count < threshold:
-                        same_prediction_count += 1
+            prediction_window.append(predicted_character)
+
+            # Only start voting after window is filled
+            if len(prediction_window) == prediction_window.maxlen:
+                most_common, count = Counter(prediction_window).most_common(1)[0]
+                stable_prediction = most_common
+                stability_ratio = count / prediction_window.maxlen
             else:
-                same_prediction_count = 1
-                prev_prediction = predicted_character
+                stable_prediction = None
+                stability_ratio = 0
 
             # Bounding box
             x1 = int(min(x_) * W) - 10
@@ -97,7 +83,7 @@ while True:
                         cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 3, cv2.LINE_AA)
             
             # progress bar
-            progress_ratio = same_prediction_count / threshold
+            progress_ratio = stability_ratio
             bar_x, bar_y = 10, H - 20
             bar_width, bar_height = 300, 15
 
@@ -106,7 +92,7 @@ while True:
 
             # Change color if full
             bar_color = (0, 255, 0)  # green
-            if same_prediction_count >= threshold:
+            if progress_ratio >= 1.0 or progress_ratio >= 0.8:
                 bar_color = (255, 0, 0)  # blue when stable
 
             # Draw fill
@@ -117,8 +103,16 @@ while True:
                         -1)
 
             # Optional: label
-            cv2.putText(frame, f"Hold: {same_prediction_count}/{threshold}",
-                        (bar_x, bar_y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            cv2.putText(frame,
+                        f"Stability: {int(progress_ratio * 100)}%",
+                        (bar_x, bar_y - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.6,
+                        (255, 255, 255),
+                        2)
+
+
+
 
     cv2.imshow('frame', frame)
     k = cv2.waitKey(1)
@@ -127,18 +121,18 @@ while True:
         print("Escape hit, closing...")
         break
     elif k % 256 == 13:  # ENTER key
-        if same_prediction_count >= threshold:
-            if predicted_character == 'space':
+        if stability_ratio >= 0.8:  # e.g., 12 out of 15 frames
+            if stable_prediction == 'space':
                 current_word += ' '
-            elif predicted_character == 'delete':
+            elif stable_prediction == 'delete':
                 current_word = current_word[:-1]
             else:
-                current_word += predicted_character
-            print(f"✅ Added: {predicted_character}")
-            same_prediction_count = 0
+                current_word += stable_prediction
+            print(f"✅ Added: {stable_prediction}")
+            prediction_window.clear()
         else:
             print("⚠️ Prediction not stable enough to accept")
-        with open("voicify/backend/saved_word.txt", "w") as f:
+        with open("backend/saved_word.txt", "w") as f:
             f.write(current_word)
 
 cap.release()
