@@ -10,7 +10,11 @@ same_prediction_count = 0
 threshold = 15  # 15 consistent frames before saving
 
 # Load model
+<<<<<<< HEAD
 model_dict = pickle.load(open('backend/model_v2.p', 'rb'))
+=======
+model_dict = pickle.load(open('voicify/backend/model_v2.p', 'rb'))
+>>>>>>> f1926140dfbc4d3e6020b92252cec2dfb6d17a86
 model = model_dict['model']
 
 # Webcam and MediaPipe setup
