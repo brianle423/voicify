@@ -182,15 +182,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Endpoint to return the current word
-@app.get("/latest")
-def get_latest_prediction():
+@app.get("/current-sign")
+def get_current_sign():
     try:
-        with open("backend/saved_word.txt", "r") as f:
-            word = f.read()
+        with open("backend/current_sign.txt", "r") as f:
+            sign = f.read().strip()
     except FileNotFoundError:
-        word = ""
-    return {"word": word}
+        sign = ""
+    return {"sign": sign}
 
 # Video feed endpoint with OpenCV/MediaPipe inference overlay
 @app.get("/video")

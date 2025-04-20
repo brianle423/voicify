@@ -12,12 +12,13 @@ const CurrentSignDisplay = ({ detectedSign, onSaveSign }) => {
         <div className="flex items-center space-x-3">
           {detectedSign && (
             <button 
-              onClick={() => onSaveSign(detectedSign)}
-              className="bg-green-600 hover:bg-green-900 font-bold text-white px-3 py-2 rounded-md flex items-center cursor-pointer"
-            >
-              <span className="material-icons mr-1 text-md font-bold">add</span>
-              Save
-            </button>
+            onClick={() => onSaveSign(detectedSign)}
+            className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md shadow-sm transition duration-200"
+            aria-label="Save current sign"
+>
+            <span className="material-icons text-lg">add_circle</span>
+            <span className="text-md">Save Sign</span>
+          </button>
           )}
           <CurrentSignHelp />
         </div>

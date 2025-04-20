@@ -370,6 +370,7 @@ def generate_video_stream():
                               -1)
                 cv2.putText(frame, f"Stability: {int(progress_ratio * 100)}%", (bar_x, bar_y - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                
 
         _, jpeg = cv2.imencode('.jpg', frame)
         frame_bytes = jpeg.tobytes()
