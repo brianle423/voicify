@@ -9,11 +9,11 @@ const SignHistory = () => {
           <p className="text-2xl font-bold text-white">Translation History</p>
         </div>
       </div>
-      <div>
-        <p>
-          OUTPUT TEXT HERE
-        </p>
+
+      <div className="flex flex-col justify-center items-center h-full text-gray-600 text-center">
+          <p> No translation history yet </p>
       </div>
+
     </div>
   )
 }

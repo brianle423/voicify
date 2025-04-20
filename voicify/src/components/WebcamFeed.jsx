@@ -95,6 +95,11 @@ const WebcamFeed = forwardRef(({ onFrame, onCameraOn }, ref) => {
       <div
         className="relative w-full h-120 bg-gray-600 overflow-hidden"
       >
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+          <span className="material-icons text-white">videocam_off</span>
+          <p> Camera is currently off. Click "Start Camera" to begin translation. </p>
+        </div>
+        
         <video
           ref={videoRef}
           style={{
