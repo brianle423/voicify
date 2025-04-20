@@ -65,17 +65,20 @@ const WebcamFeed = ({ onFrame }) => {
 
   return (
     <div className="w-full">
-      <button
-        onClick={() => setCameraOn((prev) => !prev)}
-        className={`mb-3 px-4 py-2 text-white border-none rounded-md cursor-pointer ${
-          cameraOn ? 'bg-red-600' : 'bg-green-500'
-        }`}
-      >
-        {cameraOn ? 'Turn Off Camera' : 'Turn On Camera'}
-      </button>
+      <div className="flex flex-row justify-between items-center px-4">
+        <p className="text-2xl font-bold text-white">Camera</p>
+        <button
+          onClick={() => setCameraOn((prev) => !prev)}
+          className={`mb-3 px-4 py-2 mt-3 text-white border-none relative absolute rounded-md cursor-pointer ${
+            cameraOn ? 'bg-red-600' : 'bg-gray-600'
+          }`}
+        >
+          {cameraOn ? 'Stop Camera' : 'Turn On Camera'}
+        </button>
+      </div>
 
       <div
-        className="relative w-full h-90 bg-gray-100 border border-gray-300 rounded-lg overflow-hidden"
+        className="relative w-full h-120 bg-gray-700 rounded-b-lg overflow-hidden"
       >
         <video
           ref={videoRef}
