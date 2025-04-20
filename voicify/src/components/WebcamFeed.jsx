@@ -84,7 +84,7 @@ const WebcamFeed = forwardRef(({ onFrame, onCameraOn }, ref) => {
         </div>
         <button
           onClick={handleCameraOn}
-          className={`mb-3 px-4 py-2 mt-3 text-white border-none relative absolute rounded-md cursor-pointer font-bold ${
+          className={`mb-3 px-4 py-2 mt-3 text-white border-none relative absolute rounded-md cursor-pointer font-bold transition ease-in-out duration-200 ${
             cameraOn ? 'bg-red-600 hover:bg-red-900' : 'bg-gray-600 hover:bg-gray-900'
           }`}
         >

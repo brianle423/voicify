@@ -13,7 +13,7 @@ const CurrentSignHelp = () => {
 
   return (
     <React.Fragment>
-      <div className="mb-3 px-4 py-2 mt-3 bg-gray-600 hover:bg-gray-900 text-white border-none relative absolute rounded-md cursor-pointer font-bold" onClick={handleClick}>
+      <div className="mb-3 px-4 py-2 mt-3 bg-gray-600 hover:bg-gray-900 text-white border-none relative absolute rounded-md cursor-pointer font-bold transition ease-in-out duration-200" onClick={handleClick}>
         Help
       </div>
       {isHelpOpen && (
@@ -31,7 +31,7 @@ const CurrentSignHelp = () => {
             </div>
             <div className="flex justify-center mt-4">
               <button
-                className="bg-red-600 text-white font-bold hover:bg-red-900 px-4 py-2 rounded-md border border-red-400"
+                className="bg-red-600 text-white font-bold hover:bg-red-900 px-4 py-2 rounded-md border border-red-400 transition ease-in-out duration-200 cursor-pointer"
                 onClick={handleClose}
               >
                 Close
