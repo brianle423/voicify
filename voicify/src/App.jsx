@@ -1,22 +1,35 @@
 import NavBar from "./components/NavBar"
 import WebcamFeed from "./components/WebcamFeed"
+import CurrentSignDisplay from "./components/CurrentSignDisplay"
+import SignHistory from "./components/SignHistory"
+import Footer from "./components/Footer"
+
+import React from "react"
 
 function App() {
+  const [cameraOn, setCameraOn] = React.useState(false)
 
   return (
-    <div className="flex flex-col relative h-screen w-screen bg-white">
-      <NavBar cameraStatus={true}/>
+    <>
+    <div className="flex flex-col relative h-full w-full bg-white">
+      <NavBar cameraStatus={cameraOn} />
       <div className="flex flex-row w-5/6 mx-auto space-x-10">
         {/* left column */}
         <div className="flex-1 flex flex-col justify-center items-center border rounded-lg bg-gray-800">
-          <WebcamFeed />
+          <WebcamFeed
+            onCameraOn={(newVal) => setCameraOn(newVal)}
+          />
         </div>
         {/* right column */}
-        <div className="flex-1 flex flex-col justify-center items-center border p-4 rounded-lg">
-          {/* text box on the right */}
+        <div className="flex-1 flex flex-col justify-between  items-center">
+          <CurrentSignDisplay />
+          <SignHistory />
+
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   )
 }
 

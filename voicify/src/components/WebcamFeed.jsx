@@ -1,10 +1,18 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, forwardRef, useImperativeHandle, useCallback } from 'react';
 
-const WebcamFeed = ({ onFrame }) => {
+const WebcamFeed = forwardRef(({ onFrame, onCameraOn }, ref) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
   const [cameraOn, setCameraOn] = useState(false);
+
+  const handleCameraOn = useCallback(() => {
+    const newCameraOn = !cameraOn;
+    setCameraOn(newCameraOn);
+    if (onCameraOn) {
+      onCameraOn(newCameraOn);
+    }
+  }, [cameraOn, onCameraOn, setCameraOn]);
 
   useEffect(() => {
     if (cameraOn) {
@@ -17,6 +25,10 @@ const WebcamFeed = ({ onFrame }) => {
       stopCamera();
     };
   }, [cameraOn]);
+
+  useImperativeHandle(ref, () => ({
+    isCameraOn: () => cameraOn,
+  }));
 
   const startCamera = async () => {
     try {
@@ -68,7 +80,7 @@ const WebcamFeed = ({ onFrame }) => {
       <div className="flex flex-row justify-between items-center px-4">
         <p className="text-2xl font-bold text-white">Camera</p>
         <button
-          onClick={() => setCameraOn((prev) => !prev)}
+          onClick={handleCameraOn}
           className={`mb-3 px-4 py-2 mt-3 text-white border-none relative absolute rounded-md cursor-pointer ${
             cameraOn ? 'bg-red-600' : 'bg-gray-600'
           }`}
@@ -82,22 +94,20 @@ const WebcamFeed = ({ onFrame }) => {
       >
         <video
           ref={videoRef}
-          className={`w-full h-full object-cover transform scale-x-[-1] ${
-            cameraOn ? 'block' : 'hidden'
-          }`}
+          style={{
+            display: 'none', // hide the video element
+          }}
           autoPlay
           muted
           playsInline
         />
         <canvas
           ref={canvasRef}
-          className={`absolute top-0 left-0 w-full h-full pointer-events-none ${
-            cameraOn ? 'block' : 'hidden'
-          }`}
+          className="absolute top-0 left-0 w-full h-full pointer-events-none"
         />
       </div>
     </div>
   );
-};
+});
 
 export default WebcamFeed;
