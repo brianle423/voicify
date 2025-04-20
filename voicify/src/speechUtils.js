@@ -22,6 +22,7 @@ const getVoiceByName = (name) => {
  * Speak text using speech synthesis
  * @param {string} text - Text to speak
  * @param {Object} options - Speech options
+ * @param {boolean} options.asPhrase - If true, treat as a complete phrase instead of individual characters
  */
 const speak = (text, options = {}) => {
   if (synth.speaking) {
@@ -42,8 +43,9 @@ const speak = (text, options = {}) => {
   utterance.pitch = options.pitch || 1;
   utterance.volume = options.volume || 1;
 
-  // Handle special character pronunciations
-  if (text.length === 1) {
+  // Only apply special character pronunciations for single characters
+  // and when not explicitly treating as a phrase
+  if (text.length === 1 && !options.asPhrase) {
     const pronunciationMap = {
       'A': 'ay',
       'B': 'bee',

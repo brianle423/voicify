@@ -222,11 +222,12 @@ function App() {
 
   const speakHistory = () => {
     if (signHistory.length > 0) {
-      const phrase = signHistory.join(' ');
+      const phrase = signHistory.join("");
       speechUtils.speak(phrase, {
         voice: 'Google US English',
         rate: 0.8,
-        pitch: 1.0
+        pitch: 1.0,
+        asPhrase: true  // This flag tells speechUtils to treat it as a phrase
       });
     }
   };
