@@ -9,7 +9,7 @@ current_word = ""
 prediction_window = deque(maxlen=15)
 
 # Load model
-model_dict = pickle.load(open('voicify/backend/model.p', 'rb'))
+model_dict = pickle.load(open('backend/model_v2.p', 'rb'))
 model = model_dict['model']
 
 # Webcam and MediaPipe setup
