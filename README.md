@@ -1,6 +1,6 @@
 # 🔊 Voicify – Real-Time ASL Recognition for Accessibility & Expression
 
-CLICK HERE TO VIEW [DEMO]
+[DEMO]
 
 [demo]: https://devpost.com/software/voicify-3e6n78
 
