@@ -1,5 +1,9 @@
 # 🔊 Voicify – Real-Time ASL Recognition for Accessibility & Expression
 
+CLICK HERE TO VIEW [DEMO]
+
+[demo]: https://devpost.com/software/voicify-3e6n78
+
 ## Overview: 
 
 Voicify is an AI-powered American Sign Language (ASL) recognition system that detects both individual letters of the English alphabet and commonly used English words. Our mission is to bridge communication gaps by celebrating ASL as a rich, expressive language—not just a substitute for text.
